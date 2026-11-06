@@ -8,15 +8,601 @@ This page is a work log, not a second report. Short bullets are welcome. It is s
 
 ## Starting point
 
-**AI system and date:** Replace. deez nutz
+**AI system and date:** ChatGPT 6.1-Sol 11/6/2026
 
 **Before using AI for the required extension, briefly state your question, course-based core model, baseline result, and the specific limitation or opportunity you wanted to address.**
+
+> Our question is "What effects do various musical elements have on the popularity of a music track on Spotify?". Our initial model is an additive linear model for the effects of certain predictors on a track's popularity score. The predictors are song duration, key, tempo, whether or not the song is explicit, track genre, and time signature. The baseline result was extensive and found many significant predictors, but the adj. R^2 value was pretty low (0.25). We want to improve our model to get a higher adj. R^2 value and reduce the amount of predictors we have. 
 
 ## Substantive prompts
 
 Paste the exact prompts that shaped the extension. Include the customized extension-selection prompt from the checkpoint and any important implementation follow-ups. Delete unused prompt blocks.
 
-> Replace with an exact prompt.
+> I am creating a regression case study in R and Quarto. My question is What effects do various musical elements have on the popularity of a music track on Spotify? The response is popularity (quantitative and a double), the main predictors are duration_ms (quantitative), key (categorical), tempo (quantitative), explicit (categorical, track_genre (categorical), time signature (categorical), and my course-based core model is an additive linear model lm() in R. My main result so far is lm(formula = popularity \~ duration_s + explicit + key + tempo +&#x20;
+\
+
+\
+&#x20;   track_genre + time_signature, data = spotify_data)
+\
+
+\
+
+\
+
+\
+Residuals:
+\
+
+\
+&#x20;   Min      1Q  Median      3Q     Max&#x20;
+\
+
+\
+-60.892  -8.375  -0.916  10.523  90.504&#x20;
+\
+
+\
+
+\
+
+\
+Coefficients:
+\
+
+\
+&#x20;                              Estimate Std. Error t value Pr(>|t|)   &#x20;
+\
+
+\
+(Intercept)                   4.441e+01  1.729e+00  25.683  < 2e-16 \*\*\*
+\
+
+\
+duration_s                    1.548e-03  5.821e-04   2.659 0.007828 \*\*&#x20;
+\
+
+\
+explicitTRUE                  2.953e+00  2.232e-01  13.231  < 2e-16 \*\*\*
+\
+
+\
+key1                          9.507e-01  2.528e-01   3.761 0.000169 \*\*\*
+\
+
+\
+key2                          1.249e+00  2.461e-01   5.074 3.91e-07 \*\*\*
+\
+
+\
+key3                          9.912e-01  3.645e-01   2.719 0.006548 \*\*&#x20;
+\
+
+\
+key4                          1.691e+00  2.645e-01   6.394 1.63e-10 \*\*\*
+\
+
+\
+key5                          5.562e-01  2.611e-01   2.130 0.033169 \* &#x20;
+\
+
+\
+key6                          9.851e-01  2.756e-01   3.574 0.000352 \*\*\*
+\
+
+\
+key7                          2.114e-01  2.380e-01   0.888 0.374433   &#x20;
+\
+
+\
+key8                          4.170e-01  2.818e-01   1.480 0.138875   &#x20;
+\
+
+\
+key9                          1.084e-02  2.478e-01   0.044 0.965107   &#x20;
+\
+
+\
+key10                         4.389e-01  2.805e-01   1.565 0.117616   &#x20;
+\
+
+\
+key11                         8.240e-01  2.626e-01   3.138 0.001699 \*\*&#x20;
+\
+
+\
+tempo                         1.724e-03  2.006e-03   0.859 0.390291   &#x20;
+\
+
+\
+track_genreafrobeat          -1.811e+01  8.611e-01 -21.033  < 2e-16 \*\*\*
+\
+
+\
+track_genrealt-rock          -8.735e+00  8.611e-01 -10.144  < 2e-16 \*\*\*
+\
+
+\
+track_genrealternative       -1.861e+01  8.614e-01 -21.605  < 2e-16 \*\*\*
+\
+
+\
+track_genreambient            2.102e+00  8.623e-01   2.438 0.014763 \* &#x20;
+\
+
+\
+track_genreanime              6.133e+00  8.610e-01   7.123 1.06e-12 \*\*\*
+\
+
+\
+track_genreblack-metal       -2.041e+01  8.631e-01 -23.644  < 2e-16 \*\*\*
+\
+
+\
+track_genrebluegrass         -1.673e+01  8.614e-01 -19.419  < 2e-16 \*\*\*
+\
+
+\
+track_genreblues             -1.119e+01  8.609e-01 -12.998  < 2e-16 \*\*\*
+\
+
+\
+track_genrebrazil             1.864e+00  8.617e-01   2.164 0.030485 \* &#x20;
+\
+
+\
+track_genrebreakbeat         -2.271e+01  8.640e-01 -26.287  < 2e-16 \*\*\*
+\
+
+\
+track_genrebritish            1.427e+00  8.609e-01   1.658 0.097411 . &#x20;
+\
+
+\
+track_genrecantopop          -7.649e+00  8.610e-01  -8.884  < 2e-16 \*\*\*
+\
+
+\
+track_genrechicago-house     -3.049e+01  8.659e-01 -35.212  < 2e-16 \*\*\*
+\
+
+\
+track_genrechildren          -7.115e+00  8.622e-01  -8.252  < 2e-16 \*\*\*
+\
+
+\
+track_genrechill              1.076e+01  8.617e-01  12.488  < 2e-16 \*\*\*
+\
+
+\
+track_genreclassical         -2.899e+01  8.622e-01 -33.627  < 2e-16 \*\*\*
+\
+
+\
+track_genreclub              -9.380e+00  8.610e-01 -10.894  < 2e-16 \*\*\*
+\
+
+\
+track_genrecomedy            -1.927e+01  8.751e-01 -22.021  < 2e-16 \*\*\*
+\
+
+\
+track_genrecountry           -2.536e+01  8.609e-01 -29.461  < 2e-16 \*\*\*
+\
+
+\
+track_genredance             -2.032e+01  8.616e-01 -23.587  < 2e-16 \*\*\*
+\
+
+\
+track_genredancehall         -9.844e+00  8.639e-01 -11.394  < 2e-16 \*\*\*
+\
+
+\
+track_genredeath-metal       -1.106e+01  8.624e-01 -12.821  < 2e-16 \*\*\*
+\
+
+\
+track_genredeep-house         2.190e+00  8.612e-01   2.543 0.010982 \* &#x20;
+\
+
+\
+track_genredetroit-techno    -3.165e+01  8.665e-01 -36.521  < 2e-16 \*\*\*
+\
+
+\
+track_genredisco             -8.944e+00  8.612e-01 -10.385  < 2e-16 \*\*\*
+\
+
+\
+track_genredisney            -1.443e+01  8.621e-01 -16.734  < 2e-16 \*\*\*
+\
+
+\
+track_genredrum-and-bass     -1.610e+01  8.652e-01 -18.606  < 2e-16 \*\*\*
+\
+
+\
+track_genredub               -2.757e+00  8.613e-01  -3.201 0.001371 \*\*&#x20;
+\
+
+\
+track_genredubstep           -5.580e-01  8.616e-01  -0.648 0.517244   &#x20;
+\
+
+\
+track_genreedm               -7.762e+00  8.615e-01  -9.010  < 2e-16 \*\*\*
+\
+
+\
+track_genreelectro           -6.832e+00  8.615e-01  -7.930 2.21e-15 \*\*\*
+\
+
+\
+track_genreelectronic         1.433e+00  8.613e-01   1.663 0.096276 . &#x20;
+\
+
+\
+track_genreemo                4.282e+00  8.660e-01   4.944 7.67e-07 \*\*\*
+\
+
+\
+track_genrefolk              -4.320e+00  8.614e-01  -5.015 5.31e-07 \*\*\*
+\
+
+\
+track_genreforro             -7.389e-01  8.623e-01  -0.857 0.391540   &#x20;
+\
+
+\
+track_genrefrench            -1.992e+00  8.616e-01  -2.312 0.020780 \* &#x20;
+\
+
+\
+track_genrefunk              -1.091e+01  8.634e-01 -12.639  < 2e-16 \*\*\*
+\
+
+\
+track_genregarage            -1.801e+00  8.612e-01  -2.091 0.036487 \* &#x20;
+\
+
+\
+track_genregerman            -1.591e+01  8.610e-01 -18.475  < 2e-16 \*\*\*
+\
+
+\
+track_genregospel            -9.505e-01  8.629e-01  -1.101 0.270708   &#x20;
+\
+
+\
+track_genregoth              -1.381e+01  8.613e-01 -16.037  < 2e-16 \*\*\*
+\
+
+\
+track_genregrindcore         -2.804e+01  8.629e-01 -32.491  < 2e-16 \*\*\*
+\
+
+\
+track_genregroove            -5.006e+00  8.613e-01  -5.812 6.20e-09 \*\*\*
+\
+
+\
+track_genregrunge             6.892e+00  8.612e-01   8.003 1.23e-15 \*\*\*
+\
+
+\
+track_genreguitar            -1.268e+01  8.613e-01 -14.721  < 2e-16 \*\*\*
+\
+
+\
+track_genrehappy             -2.125e+01  8.643e-01 -24.583  < 2e-16 \*\*\*
+\
+
+\
+track_genrehard-rock          6.190e-02  8.613e-01   0.072 0.942710   &#x20;
+\
+
+\
+track_genrehardcore          -7.378e+00  8.632e-01  -8.547  < 2e-16 \*\*\*
+\
+
+\
+track_genrehardstyle         -1.618e+01  8.629e-01 -18.754  < 2e-16 \*\*\*
+\
+
+\
+track_genreheavy-metal       -1.664e+01  8.616e-01 -19.315  < 2e-16 \*\*\*
+\
+
+\
+track_genrehip-hop           -5.689e+00  8.631e-01  -6.592 4.36e-11 \*\*\*
+\
+
+\
+track_genrehonky-tonk        -2.580e+01  8.619e-01 -29.930  < 2e-16 \*\*\*
+\
+
+\
+track_genrehouse             -8.618e+00  8.615e-01 -10.004  < 2e-16 \*\*\*
+\
+
+\
+track_genreidm               -2.662e+01  8.618e-01 -30.896  < 2e-16 \*\*\*
+\
+
+\
+track_genreindian             7.028e+00  8.610e-01   8.162 3.33e-16 \*\*\*
+\
+
+\
+track_genreindie             -3.676e+00  8.608e-01  -4.270 1.96e-05 \*\*\*
+\
+
+\
+track_genreindie-pop         -2.013e+00  8.609e-01  -2.338 0.019378 \* &#x20;
+\
+
+\
+track_genreindustrial        -1.220e+01  8.624e-01 -14.150  < 2e-16 \*\*\*
+\
+
+\
+track_genreiranian           -4.027e+01  8.641e-01 -46.599  < 2e-16 \*\*\*
+\
+
+\
+track_genrej-dance           -1.679e+01  8.668e-01 -19.368  < 2e-16 \*\*\*
+\
+
+\
+track_genrej-idol            -1.795e+01  8.623e-01 -20.821  < 2e-16 \*\*\*
+\
+
+\
+track_genrej-pop             -1.376e+00  8.611e-01  -1.598 0.110030   &#x20;
+\
+
+\
+track_genrej-rock            -1.920e+00  8.613e-01  -2.230 0.025770 \* &#x20;
+\
+
+\
+track_genrejazz              -2.853e+01  8.617e-01 -33.112  < 2e-16 \*\*\*
+\
+
+\
+track_genrek-pop              1.431e+01  8.611e-01  16.620  < 2e-16 \*\*\*
+\
+
+\
+track_genrekids              -2.749e+01  8.617e-01 -31.905  < 2e-16 \*\*\*
+\
+
+\
+track_genrelatin             -3.454e+01  8.612e-01 -40.109  < 2e-16 \*\*\*
+\
+
+\
+track_genrelatino            -1.755e+01  8.622e-01 -20.350  < 2e-16 \*\*\*
+\
+
+\
+track_genremalay             -1.206e+01  8.613e-01 -14.005  < 2e-16 \*\*\*
+\
+
+\
+track_genremandopop           2.475e+00  8.612e-01   2.874 0.004057 \*\*&#x20;
+\
+
+\
+track_genremetal              7.289e-01  8.617e-01   0.846 0.397607   &#x20;
+\
+
+\
+track_genremetalcore          8.131e-02  8.630e-01   0.094 0.924937   &#x20;
+\
+
+\
+track_genreminimal-techno    -8.722e+00  8.658e-01 -10.074  < 2e-16 \*\*\*
+\
+
+\
+track_genrempb               -1.600e+00  8.611e-01  -1.858 0.063232 . &#x20;
+\
+
+\
+track_genrenew-age           -1.309e+01  8.633e-01 -15.158  < 2e-16 \*\*\*
+\
+
+\
+track_genreopera             -1.746e+01  8.625e-01 -20.238  < 2e-16 \*\*\*
+\
+
+\
+track_genrepagode             1.703e+00  8.615e-01   1.977 0.048041 \* &#x20;
+\
+
+\
+track_genreparty             -2.151e+01  8.614e-01 -24.973  < 2e-16 \*\*\*
+\
+
+\
+track_genrepiano              3.122e+00  8.612e-01   3.626 0.000288 \*\*\*
+\
+
+\
+track_genrepop                4.931e+00  8.611e-01   5.727 1.02e-08 \*\*\*
+\
+
+\
+track_genrepop-film           1.680e+01  8.616e-01  19.495  < 2e-16 \*\*\*
+\
+
+\
+track_genrepower-pop         -1.571e+01  8.619e-01 -18.228  < 2e-16 \*\*\*
+\
+
+\
+track_genreprogressive-house  3.963e+00  8.613e-01   4.602 4.20e-06 \*\*\*
+\
+
+\
+track_genrepsych-rock         3.409e-01  8.610e-01   0.396 0.692211   &#x20;
+\
+
+\
+track_genrepunk              -4.533e+00  8.615e-01  -5.261 1.43e-07 \*\*\*
+\
+
+\
+track_genrepunk-rock         -4.521e+00  8.614e-01  -5.248 1.54e-07 \*\*\*
+\
+
+\
+track_genrer-n-b             -5.894e+00  8.610e-01  -6.846 7.64e-12 \*\*\*
+\
+
+\
+track_genrereggae            -2.236e+01  8.615e-01 -25.955  < 2e-16 \*\*\*
+\
+
+\
+track_genrereggaeton         -1.929e+01  8.619e-01 -22.382  < 2e-16 \*\*\*
+\
+
+\
+track_genrerock              -2.351e+01  8.611e-01 -27.302  < 2e-16 \*\*\*
+\
+
+\
+track_genrerock-n-roll       -7.814e+00  8.615e-01  -9.070  < 2e-16 \*\*\*
+\
+
+\
+track_genrerockabilly        -1.080e+01  8.615e-01 -12.536  < 2e-16 \*\*\*
+\
+
+\
+track_genreromance           -3.873e+01  8.625e-01 -44.904  < 2e-16 \*\*\*
+\
+
+\
+track_genresad                8.683e+00  8.660e-01  10.026  < 2e-16 \*\*\*
+\
+
+\
+track_genresalsa             -1.443e+01  8.621e-01 -16.736  < 2e-16 \*\*\*
+\
+
+\
+track_genresamba             -3.636e+00  8.614e-01  -4.222 2.43e-05 \*\*\*
+\
+
+\
+track_genresertanejo          5.517e+00  8.611e-01   6.407 1.49e-10 \*\*\*
+\
+
+\
+track_genreshow-tunes        -1.097e+01  8.611e-01 -12.745  < 2e-16 \*\*\*
+\
+
+\
+track_genresinger-songwriter -4.584e+00  8.609e-01  -5.324 1.02e-07 \*\*\*
+\
+
+\
+track_genreska               -7.416e+00  8.615e-01  -8.609  < 2e-16 \*\*\*
+\
+
+\
+track_genresleep             -7.175e+00  8.938e-01  -8.027 1.01e-15 \*\*\*
+\
+
+\
+track_genresongwriter        -4.584e+00  8.609e-01  -5.324 1.02e-07 \*\*\*
+\
+
+\
+track_genresoul              -2.273e+01  8.613e-01 -26.392  < 2e-16 \*\*\*
+\
+
+\
+track_genrespanish           -4.632e+00  8.609e-01  -5.381 7.43e-08 \*\*\*
+\
+
+\
+track_genrestudy             -1.618e+01  8.621e-01 -18.766  < 2e-16 \*\*\*
+\
+
+\
+track_genreswedish           -5.505e+00  8.609e-01  -6.394 1.63e-10 \*\*\*
+\
+
+\
+track_genresynth-pop         -6.074e+00  8.612e-01  -7.053 1.76e-12 \*\*\*
+\
+
+\
+track_genretango             -2.231e+01  8.615e-01 -25.893  < 2e-16 \*\*\*
+\
+
+\
+track_genretechno            -3.699e+00  8.631e-01  -4.285 1.83e-05 \*\*\*
+\
+
+\
+track_genretrance            -4.987e+00  8.622e-01  -5.784 7.31e-09 \*\*\*
+\
+
+\
+track_genretrip-hop          -8.212e+00  8.617e-01  -9.530  < 2e-16 \*\*\*
+\
+
+\
+track_genreturkish           -2.428e+00  8.617e-01  -2.818 0.004839 \*\*&#x20;
+\
+
+\
+track_genreworld-music       -5.640e-01  8.622e-01  -0.654 0.513037   &#x20;
+\
+
+\
+time_signature1              -4.682e+00  1.719e+00  -2.724 0.006456 \*\*&#x20;
+\
+
+\
+time_signature3              -4.691e+00  1.626e+00  -2.885 0.003910 \*\*&#x20;
+\
+
+\
+time_signature4              -3.048e+00  1.619e+00  -1.883 0.059706 . &#x20;
+\
+
+\
+time_signature5              -3.824e+00  1.667e+00  -2.293 0.021824 \* &#x20;
+\
+
+\
+\---
+\
+
+\
+Signif. codes:  0 '\*\*\*' 0.001 '\*\*' 0.01 '\*' 0.05 '.' 0.1 ' ' 1
+\
+
+\
+
+\
+
+\
+Residual standard error: 19.25 on 113868 degrees of freedom
+\
+
+\
+Multiple R-squared:  0.2564,    Adjusted R-squared:  0.2555&#x20;
+\
+
+\
+F-statistic: 299.7 on 131 and 113868 DF,  p-value: < 2.2e-16. I found this limitation or opportunity: The R^2 is very low and we have a lot of variables. Suggest three feasible extensions that keep the core analysis connected to regression methods taught in my class. One option may be a model not taught in class used as a comparator. For each, explain how it strengthens the same research question, how its result would enter the final case study, the implementation steps, and two ways I could verify it. Do not choose for me.
 
 > Replace with another exact prompt, if needed.
 
@@ -29,6 +615,10 @@ Paste the exact prompts that shaped the extension. Include the customized extens
 **Connection to the final case study:** Identify where the extension's method and result appear on the final page and how they strengthen the course-based analysis.
 
 ## Independent verification
+
+> For our independent verification, we plan to compare our linear model to a non-linear model. We will see if using a non-linear model will improve the adj. R^2 value.
+
+> For our second verification, we plan to run cross-validation to compare the prediction accuracy for both the linear model and the non-linear model.
 
 1. **Check and result:** Replace with an official source, diagnostic, simulation, manual calculation, comparison with a known method, or another suitable check.
 2. **Check and result:** Replace with a different check and what you learned.
