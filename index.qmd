@@ -6,7 +6,7 @@ date: last-modified
 description: "114,000 tracks on Spotify across 14 prediction variables"
 ---
 
-**Narrative word count:** Replace with a number from 750 to 1,000.
+**Narrative word count:** TBD
 
 ## The question
 
